@@ -18,7 +18,5 @@ public class Product extends BaseEntity {
     private Long id;
 
     private String name;
-
-
-    //todo 신규 가입사면 걔네 이미등록되어잇는 상품도 받아올수 잇어야함.
+    private String code;
 }
