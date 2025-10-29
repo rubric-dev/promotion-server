@@ -1,0 +1,15 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: promotion_local
+      POSTGRES_USER: promotion_local
+      POSTGRES_PASSWORD: promotion_local
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

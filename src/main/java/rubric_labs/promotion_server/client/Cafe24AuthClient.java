@@ -17,16 +17,16 @@ public class Cafe24AuthClient {
 
     private final RestTemplate restTemplate;
 
-    @Value("${cafe24.mall-id}")
+    @Value("${app.cafe24.mall-id}")
     private String mallId;
 
-    @Value("${cafe24.client-id}")
+    @Value("${app.cafe24.client-id}")
     private String clientId;
 
-    @Value("${cafe24.client-secret}")
+    @Value("${app.cafe24.client-secret}")
     private String clientSecret;
 
-    @Value("${cafe24.redirect-uri}")
+    @Value("${app.cafe24.redirect-uri}")
     private String redirectUri;
 
     private static final String TOKEN_URL_TEMPLATE = "https://%s.cafe24api.com/api/v2/oauth/token";

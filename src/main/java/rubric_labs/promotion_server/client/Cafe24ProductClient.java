@@ -13,10 +13,10 @@ public class Cafe24ProductClient {
 
     private final RestTemplate restTemplate;
 
-    @Value("${cafe24.mall-id}")
+    @Value("${app.cafe24.mall-id}")
     private String mallId;
 
-    @Value("${cafe24.api-version:2025-09-01}")
+    @Value("${app.cafe24.api-version:2025-09-01}")
     private String apiVersion;
 
     private static final String BASE_URL_TEMPLATE = "https://%s.cafe24api.com/api/v2/admin/products";

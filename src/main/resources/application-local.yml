@@ -1,0 +1,51 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+  datasource:
+    url: jdbc:postgresql://localhost:5432/promotion_local
+    username: promotion_local
+    password: promotion_local
+#    url: jdbc:postgresql://localhost:5432/mardi
+#    username: mini
+#    password: 1234
+
+  cloud:
+    aws:
+      credentials:
+        access-key: mock
+        secret-key: mock
+      region:
+        static: ap-northeast-2
+      s3:
+        bucket: file.dev.puffin.kr
+
+  aws:
+    sqs:
+      s3-file-upload:
+        queue-url: dummy
+
+application:
+  env: local
+
+nhn_cloud:
+  sender_key: dummy
+  access_key: dummy
+
+security:
+  jwt:
+    expiration:
+
+app:
+  cors:
+    allow-origins:
+      - http://localhost:3000
+      - http://localhost:3001
+      - https://dev-app.mardi-erp.com
+      - https://dev-api.mardi-erp.com
+
+  cafe24:
+    mall-id: yourmallid
+    client-id: yourclientid
+    client-secret: yourclientsecret
+    redirect-uri: https://yourapp.com/oauth/callback
