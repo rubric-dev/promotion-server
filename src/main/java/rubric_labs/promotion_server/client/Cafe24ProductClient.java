@@ -6,6 +6,8 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
+import rubric_labs.promotion_server.api.request.Cafe24CreateProductRequest;
+import rubric_labs.promotion_server.dto.Cafe24RequestWrapper;
 
 @Component
 @RequiredArgsConstructor
@@ -53,5 +55,24 @@ public class Cafe24ProductClient {
                 requestEntity,
                 String.class
         );
+    }
+
+    /**
+     * 상품 등록
+     */
+    public ResponseEntity<String> createProduct(String accessToken, Cafe24CreateProductRequest requestDto) {
+        String url = String.format(BASE_URL_TEMPLATE, mallId);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("Authorization", "Bearer " + accessToken);
+        headers.set("X-Cafe24-Api-Version", apiVersion);
+
+        Cafe24RequestWrapper<Cafe24CreateProductRequest> wrapper = new Cafe24RequestWrapper<>(requestDto);
+
+        HttpEntity<Cafe24RequestWrapper<Cafe24CreateProductRequest>> entity =
+                new HttpEntity<>(wrapper, headers);
+
+        return restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
     }
 }

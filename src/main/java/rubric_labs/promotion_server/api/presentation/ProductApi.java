@@ -14,15 +14,22 @@ public class ProductApi {
 
     //todo 신규 가입사면 걔네 이미등록되어잇는 상품도 받아올수 잇어야함.
 
-    @PostMapping
+    @PostMapping("/sync")
     public CommonResponse syncProductInfo(@PathVariable String companyCode,
-                                          @RequestParam String code){
+                                          @RequestParam String code) {
         cafe24ProductService.fetchProducts(code);
         return null;
     }
 
+    @PostMapping
+    public CommonResponse addProduct(@PathVariable String companyCode,
+                                     @RequestParam String code) {
+        cafe24ProductService.createSampleProduct(code);
+        return null;
+    }
+
     @GetMapping
-    public CommonResponse getList(@RequestParam String name){
+    public CommonResponse getList(@RequestParam String name) {
         return null;
     }
 }
