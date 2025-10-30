@@ -15,8 +15,9 @@ public class ProductApi {
     //todo 신규 가입사면 걔네 이미등록되어잇는 상품도 받아올수 잇어야함.
 
     @PostMapping
-    public CommonResponse syncProductInfo(@PathVariable String companyCode){
-        cafe24ProductService.fetchProducts();
+    public CommonResponse syncProductInfo(@PathVariable String companyCode,
+                                          @RequestParam String code){
+        cafe24ProductService.fetchProducts(code);
         return null;
     }
 
