@@ -23,9 +23,19 @@ public class Mall extends BaseEntity {
     private String mallId;
     private String clientId;
     private String clientSecret;
-    private String apiKey;
 
-    public void update(String name, String mallId, String clientId, String clientSecret, String apiKey) {
+    public static Mall of(Long companyId, String name, String mallId,
+                          String clientId, String clientSecret) {
+        return Mall.builder()
+                .companyId(companyId)
+                .name(name)
+                .mallId(mallId)
+                .clientId(clientId)
+                .clientSecret(clientSecret)
+                .build();
+    }
+
+    public void update(String name, String mallId, String clientId, String clientSecret) {
         if (name != null) {
             this.name = name;
         }
@@ -37,9 +47,6 @@ public class Mall extends BaseEntity {
         }
         if (clientSecret != null) {
             this.clientSecret = clientSecret;
-        }
-        if (apiKey != null) {
-            this.apiKey = apiKey;
         }
     }
 }

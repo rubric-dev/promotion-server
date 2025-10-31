@@ -17,7 +17,6 @@ public class MallRequest {
         private String mallId;
         private String clientId;
         private String clientSecret;
-        private String apiKey;
     }
 
     @AllArgsConstructor
@@ -29,6 +28,5 @@ public class MallRequest {
         private String mallId;
         private String clientId;
         private String clientSecret;
-        private String apiKey;
     }
 }

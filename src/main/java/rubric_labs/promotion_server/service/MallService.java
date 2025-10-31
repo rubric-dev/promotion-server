@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import rubric_labs.promotion_server.api.request.MallRequest;
 import rubric_labs.promotion_server.domain.mall.Mall;
 import rubric_labs.promotion_server.domain.mall.MallRepository;
+import rubric_labs.promotion_server.response.MallResponse;
 
 @Service
 @RequiredArgsConstructor
@@ -16,14 +17,13 @@ public class MallService {
 
     @Transactional
     public Long createMall(MallRequest.Create request) {
-        Mall mall = Mall.builder()
-                .companyId(request.getCompanyId())
-                .name(request.getName())
-                .mallId(request.getMallId())
-                .clientId(request.getClientId())
-                .clientSecret(request.getClientSecret())
-                .apiKey(request.getApiKey())
-                .build();
+        Mall mall = Mall.of(
+                request.getCompanyId(),
+                request.getName(),
+                request.getMallId(),
+                request.getClientId(),
+                request.getClientSecret()
+        );
 
         Mall savedMall = mallRepository.save(mall);
         return savedMall.getId();
@@ -31,23 +31,21 @@ public class MallService {
 
     @Transactional
     public Long updateMall(Long mallId, MallRequest.Update request) {
-        Mall mall = mallRepository.findById(mallId)
-                .orElseThrow(() -> new IllegalArgumentException("Mall not found with id: " + mallId));
+        Mall mall = mallRepository.findOneById(mallId);
 
         // Mall 엔티티에 update 메서드가 필요합니다
         mall.update(
                 request.getName(),
                 request.getMallId(),
                 request.getClientId(),
-                request.getClientSecret(),
-                request.getApiKey()
+                request.getClientSecret()
         );
 
         return mall.getId();
     }
 
-    public Mall getMall(Long mallId) {
-        return mallRepository.findById(mallId)
-                .orElseThrow(() -> new IllegalArgumentException("Mall not found with id: " + mallId));
+    public MallResponse.Detail getMall(Long mallId) {
+        Mall mall = mallRepository.findOneById(mallId);
+        return MallResponse.Detail.from(mall);
     }
 }

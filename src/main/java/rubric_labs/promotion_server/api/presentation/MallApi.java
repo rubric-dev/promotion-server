@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import rubric_labs.promotion_server.api.request.MallRequest;
 import rubric_labs.promotion_server.common.dto.response.CommonResponse;
-import rubric_labs.promotion_server.domain.mall.Mall;
+import rubric_labs.promotion_server.response.MallResponse;
 import rubric_labs.promotion_server.service.MallService;
 
 @RequestMapping("/api/v1/malls")
@@ -27,8 +27,8 @@ public class MallApi {
     }
 
     @GetMapping("/{mallId}")
-    public CommonResponse<Mall> getMall(@PathVariable Long mallId) {
-        Mall mall = mallService.getMall(mallId);
-        return null;
+    public CommonResponse<MallResponse.Detail> getMall(@PathVariable Long mallId) {
+
+        return new CommonResponse<>(mallService.getMall(mallId));
     }
 }
