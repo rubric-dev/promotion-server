@@ -13,7 +13,6 @@ public class PromotionRequest {
     @AllArgsConstructor
     @NoArgsConstructor
     @Getter
-    @Builder
     public static class Create {
         // 기본 정보
         private String name;                 // 프로모션 이름
@@ -41,7 +40,6 @@ public class PromotionRequest {
     @AllArgsConstructor
     @NoArgsConstructor
     @Getter
-    @Builder
     public static class Update {
         private String name;
         private String description;

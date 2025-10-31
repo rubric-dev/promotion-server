@@ -24,4 +24,22 @@ public class Mall extends BaseEntity {
     private String clientId;
     private String clientSecret;
     private String apiKey;
+
+    public void update(String name, String mallId, String clientId, String clientSecret, String apiKey) {
+        if (name != null) {
+            this.name = name;
+        }
+        if (mallId != null) {
+            this.mallId = mallId;
+        }
+        if (clientId != null) {
+            this.clientId = clientId;
+        }
+        if (clientSecret != null) {
+            this.clientSecret = clientSecret;
+        }
+        if (apiKey != null) {
+            this.apiKey = apiKey;
+        }
+    }
 }
