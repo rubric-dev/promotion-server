@@ -12,6 +12,7 @@ import rubric_labs.promotion_server.domain.mall.Mall;
 import rubric_labs.promotion_server.dto.Cafe24Token;
 
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
 import java.util.Base64;
 
 @Slf4j
@@ -78,7 +79,10 @@ public class Cafe24AuthClient {
                 Cafe24Token.class
         );
 
-        return response.getBody();
+        Cafe24Token tokenRes = response.getBody();
+        mall.updateTokens(tokenRes.getAccessToken(), tokenRes.getRefreshToken(), LocalDateTime.parse(tokenRes.getExpiresAt()));
+
+        return tokenRes;
     }
 
     /**

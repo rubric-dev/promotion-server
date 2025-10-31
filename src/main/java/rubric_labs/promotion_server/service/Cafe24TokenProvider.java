@@ -2,6 +2,7 @@ package rubric_labs.promotion_server.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import rubric_labs.promotion_server.client.Cafe24AuthClient;
 import rubric_labs.promotion_server.domain.mall.Mall;
 import rubric_labs.promotion_server.domain.mall.MallRepository;
@@ -22,12 +23,15 @@ public class Cafe24TokenProvider {
      * - 기존 토큰이 유효하면 재사용
      * - 만료 시 refresh
      */
-    public synchronized String getOrRefreshAccessToken(String code, Long mallId) {
+    @Transactional
+    public String getOrRefreshAccessToken(String code, Long mallId) {
         Mall mall = mallRepository.findOneById(mallId);
 
         // 최초 발급
         if (!mall.hasAccessToken()) {
             Cafe24Token tokenRes = authClient.getAccessTokenObject(mall, code);
+
+            mall.updateTokens(tokenRes.getAccessToken(), tokenRes.getRefreshToken(), LocalDateTime.parse(tokenRes.getExpiresAt()));
             return tokenRes.getAccessToken();
         }
 
