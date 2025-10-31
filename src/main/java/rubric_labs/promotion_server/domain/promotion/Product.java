@@ -17,6 +17,17 @@ public class Product extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Long companyId;
+    private Long mallId;
     private String name;
     private String code;
+
+    public static Product of(Long companyId, Long mallId, String name, String code) {
+        return Product.builder()
+                .companyId(companyId)
+                .mallId(mallId)
+                .name(name)
+                .code(code)
+                .build();
+    }
 }

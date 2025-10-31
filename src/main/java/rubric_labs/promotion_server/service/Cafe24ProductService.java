@@ -23,7 +23,7 @@ public class Cafe24ProductService {
         System.out.println("Products: " + response.getBody());
     }
 
-    public void createSampleProduct(String code) {
+    public String createSampleProduct(String code) {
         // 1️⃣ 유효 access token 확보
         String accessToken = tokenProvider.getOrRefreshAccessToken(code);
 
@@ -44,5 +44,8 @@ public class Cafe24ProductService {
         // 3️⃣ API 호출
         ResponseEntity<String> response = productClient.createProduct(accessToken, request);
         System.out.println("상품 등록 결과: " + response.getBody());
+
+        // 4️⃣ 상품명 반환
+        return request.getProductName();
     }
 }

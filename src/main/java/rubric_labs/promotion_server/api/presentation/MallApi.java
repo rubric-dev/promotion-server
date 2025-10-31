@@ -8,7 +8,7 @@ import rubric_labs.promotion_server.common.dto.response.CommonResponse;
 import rubric_labs.promotion_server.response.MallResponse;
 import rubric_labs.promotion_server.service.MallService;
 
-@RequestMapping("/api/v1/malls")
+@RequestMapping("/api/v1/company/{companyCode}/malls")
 @RequiredArgsConstructor
 @RestController
 public class MallApi {
