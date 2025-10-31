@@ -31,4 +31,10 @@ public class MallApi {
 
         return new CommonResponse<>(mallService.getMall(mallId));
     }
+
+    @GetMapping
+    public CommonResponse<MallResponse.ListResponse> getMallsByCompanyId(@RequestParam Long companyId) {
+        MallResponse.ListResponse response = mallService.getMallsByCompanyId(companyId);
+        return new CommonResponse<>(response);
+    }
 }

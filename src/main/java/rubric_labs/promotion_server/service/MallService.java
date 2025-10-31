@@ -9,6 +9,8 @@ import rubric_labs.promotion_server.domain.mall.Mall;
 import rubric_labs.promotion_server.domain.mall.MallRepository;
 import rubric_labs.promotion_server.response.MallResponse;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -47,5 +49,10 @@ public class MallService {
     public MallResponse.Detail getMall(Long mallId) {
         Mall mall = mallRepository.findOneById(mallId);
         return MallResponse.Detail.from(mall);
+    }
+
+    public MallResponse.ListResponse getMallsByCompanyId(Long companyId) {
+        List<Mall> malls = mallRepository.findByCompanyId(companyId);
+        return MallResponse.ListResponse.from(malls);
     }
 }
