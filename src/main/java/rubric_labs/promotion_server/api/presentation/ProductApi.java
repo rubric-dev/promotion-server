@@ -19,8 +19,9 @@ public class ProductApi {
 
     @PostMapping("/sync")
     public CommonResponse syncProductInfo(@PathVariable String companyCode,
-                                          @RequestParam String code) {
-        cafe24ProductService.fetchProducts(code);
+                                          @RequestParam String code,
+                                          @RequestParam Long mallId) {
+        cafe24ProductService.fetchProducts(code, mallId);
         return CommonResponse.ok();
     }
 
@@ -29,7 +30,7 @@ public class ProductApi {
                                      @RequestParam String code,
                                      @RequestParam Long companyId,    // 추가
                                      @RequestParam Long mallId) {
-        String productName = cafe24ProductService.createSampleProduct(code);
+        String productName = cafe24ProductService.createSampleProduct(code, mallId);
         Long productId = productService.saveProduct(companyId, mallId, productName, companyCode);
         return new CommonResponse(productId);
     }

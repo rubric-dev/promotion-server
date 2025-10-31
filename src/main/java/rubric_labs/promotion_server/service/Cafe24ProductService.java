@@ -9,13 +9,12 @@ import rubric_labs.promotion_server.client.Cafe24ProductClient;
 @Service
 @RequiredArgsConstructor
 public class Cafe24ProductService {
-
     private final Cafe24TokenProvider tokenProvider;
     private final Cafe24ProductClient productClient;
 
-    public void fetchProducts(String code) {
+    public void fetchProducts(String code, Long mallId) {
         // ✅ Provider에서 토큰 관리 & 자동 refresh
-        String accessToken = tokenProvider.getOrRefreshAccessToken(code);
+        String accessToken = tokenProvider.getOrRefreshAccessToken(code, mallId);
 
         // 2️⃣ 상품 목록 조회
         ResponseEntity<String> response = productClient.getProducts(accessToken, 20, 0, "iPhone");
@@ -23,9 +22,9 @@ public class Cafe24ProductService {
         System.out.println("Products: " + response.getBody());
     }
 
-    public String createSampleProduct(String code) {
+    public String createSampleProduct(String code, Long mallId) {
         // 1️⃣ 유효 access token 확보
-        String accessToken = tokenProvider.getOrRefreshAccessToken(code);
+        String accessToken = tokenProvider.getOrRefreshAccessToken(code, mallId);
 
         // 2️⃣ 상품 등록 요청 DTO
         Cafe24CreateProductRequest request = Cafe24CreateProductRequest.builder()
